@@ -23,7 +23,7 @@ public class Blog {
     private String name;
     private String description;
 
-    private Blog(){}
+    public Blog(){}
 
     public Blog(String name, String description) {
         this.created = new Date();
