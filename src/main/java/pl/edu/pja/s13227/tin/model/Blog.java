@@ -5,38 +5,41 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class Blog {
+public class Blog extends TimestampedEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private Date created;
 //    user owner
-//    category category
     @Column(unique = true)
     private String name;
     private String description;
 
+    @ManyToMany
+    @JoinTable
+    private Set<Category> categories = new HashSet<>();
+
     public Blog(){}
 
     public Blog(String name, String description) {
-        this.created = new Date();
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public Blog(String name, String description, Set<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
     }
 
-    public Date getCreated() {
-        return created;
+    public Blog(String name, String description, Category... categories) {
+        this.name = name;
+        this.description = description;
+        this.categories = new HashSet<>(Arrays.asList(categories));
     }
 
     public String getName() {
@@ -55,6 +58,18 @@ public class Blog {
         this.description = description;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -63,23 +78,6 @@ public class Blog {
 
 
 /*
-POST
-
-id
-created
-blog
-author
-category (enum)
-title
-content
-
-BLOG
-
-id
-created
-owner
-category
-name
 
 COMMENT
 

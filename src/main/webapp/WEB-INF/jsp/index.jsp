@@ -36,11 +36,23 @@
 
 		<div class="starter-template">
 			<h1>Blogs:</h1>
-			<ol>
-			    <c:forEach items="${blogs}" var="blog">
-                    <li>${blog.name}</li>
-                </c:forEach>
-            </ol>
+			<table>
+			    <thead>
+			        <th>Id</th>
+			        <th>Blog name</th>
+			        <th>Categories</th>
+			    </thead>
+			    <tbody>
+			        <c:forEach items="${blogs}" var="blog">
+			            <tr>
+			                <td>${blog.id}</td>
+			                <td>${blog.name}</td>
+			                <td><c:forEach items="${blog.categories}" var="category">${category.id} ${category.name}<br></c:forEach></td>
+			            </tr>
+			        </c:forEach>
+			    </tbody>
+			</table>
+
 		</div>
 
 	</div>

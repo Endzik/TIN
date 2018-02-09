@@ -9,7 +9,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import pl.edu.pja.s13227.tin.model.Blog;
+import pl.edu.pja.s13227.tin.model.Category;
 import pl.edu.pja.s13227.tin.persistence.BlogRepository;
+import pl.edu.pja.s13227.tin.persistence.CategoryRepository;
 
 import java.util.Date;
 
@@ -28,20 +30,17 @@ public class Application extends SpringBootServletInitializer {
     }
 
     @Bean
-    public CommandLineRunner initialize(BlogRepository repository) {
+    public CommandLineRunner initialize(BlogRepository blogRepository, CategoryRepository categoryRepository) {
         return args -> {
-            repository.save(new Blog("Java SE Blog", "o javie"));
-            repository.save(new Blog("Python Blog", "ktos to czyta?"));
-            repository.save(new Blog("Java EE Blog", "Spring i inne glupoty"));
+            Category programming = new Category("Programowanie");
+            Category enterprise = new Category("Enterprise");
+            categoryRepository.save(programming);
+            categoryRepository.save(enterprise);
 
-            LOG.info("Find all:");
-            repository.findAll().forEach(b -> LOG.info("{}", b));
-
-            LOG.info("Find by name: \"Java\":");
-            repository.findByNameStartsWithIgnoreCase("java").forEach(b -> LOG.info("{}", b));
-
-            LOG.info("Found by id: 1");
-            LOG.info("{}", repository.findOne(1L));
+            blogRepository.save(new Blog("Java SE Blog", "o javie", programming));
+            blogRepository.save(new Blog("Python Blog", "ktos to czyta?", programming));
+            blogRepository.save(new Blog("Java EE Blog", "Spring i inne glupoty", programming, enterprise));
+            blogRepository.save(new Blog("Gotujemy", "Cooking stuff"));
 
             LOG.info("TIN app succesfully started at {}", new Date());
         };

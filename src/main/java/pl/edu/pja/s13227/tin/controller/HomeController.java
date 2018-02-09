@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.edu.pja.s13227.tin.service.BlogService;
+import pl.edu.pja.s13227.tin.service.CategoryService;
 
 @Controller
 public class HomeController {
@@ -15,6 +16,9 @@ public class HomeController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/")
     public String index(Model model) {
