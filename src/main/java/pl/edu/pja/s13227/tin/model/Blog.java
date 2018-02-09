@@ -1,4 +1,4 @@
-package pl.edu.pja.s13227.tin.domain;
+package pl.edu.pja.s13227.tin.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
