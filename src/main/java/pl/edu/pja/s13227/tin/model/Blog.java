@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,6 +25,9 @@ public class Blog extends TimestampedEntity {
     @ManyToMany
     @JoinTable
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "blog")
+    private Set<Post> posts = new HashSet<>();
 
     public Blog(){}
 
@@ -72,8 +76,17 @@ public class Blog extends TimestampedEntity {
         categories.add(category);
     }
 
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
 }

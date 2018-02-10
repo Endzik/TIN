@@ -31,7 +31,7 @@
         <div class="row">
             <c:forEach items="${blogs}" var="blog">
                 <div class="col-xs-4">
-                    <a href="#">
+                    <a href="/blogs/${blog.id}">
                         <div class="blog-tile">
                             <h3>${blog.name}</h3>
                             <p>
