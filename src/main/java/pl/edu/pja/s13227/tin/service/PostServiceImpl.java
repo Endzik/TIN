@@ -37,4 +37,9 @@ public class PostServiceImpl implements PostService {
                 .filter(p -> p.getCategories().contains(category))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void save(Post post) {
+        postRepository.save(post);
+    }
 }

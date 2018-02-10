@@ -1,5 +1,7 @@
 package pl.edu.pja.s13227.tin.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pja.s13227.tin.model.Blog;
@@ -10,6 +12,8 @@ import java.util.List;
 @Service
 public class BlogServiceImpl implements BlogService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlogServiceImpl.class);
+
     @Autowired
     private BlogRepository blogRepository;
 
@@ -19,7 +23,18 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Blog findByName(String name) {
+        return blogRepository.findByName(name);
+    }
+
+    @Override
     public List<Blog> findAll() {
         return blogRepository.findAll();
+    }
+
+    @Override
+    public void save(Blog blog) {
+        blogRepository.save(blog);
+        LOGGER.info("Saved blog: {}", blog);
     }
 }

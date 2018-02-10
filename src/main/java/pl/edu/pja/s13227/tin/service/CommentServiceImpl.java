@@ -27,4 +27,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findByContent(String content) {
         return commentRepository.findByContentsContainingIgnoreCase(content);
     }
+
+    @Override
+    public void save(Comment comment) {
+        commentRepository.save(comment);
+    }
 }

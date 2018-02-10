@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class Blog extends TimestampedEntity {
 
 //    user owner
     @Column(unique = true)
+    @NotNull
     private String name;
     private String description;
 
@@ -75,15 +77,3 @@ public class Blog extends TimestampedEntity {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
-
-
-/*
-
-COMMENT
-
-id
-author
-post
-content
-
- */

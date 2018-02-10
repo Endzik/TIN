@@ -24,6 +24,7 @@ public class HomeController {
     public String index(Model model) {
         LOGGER.info("Opening home page...");
         model.addAttribute("blogs", blogService.findAll());
-        return "index";
+        return "redirect:/blogs";
     }
+
 }

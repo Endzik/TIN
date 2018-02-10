@@ -9,4 +9,5 @@ public interface CommentService {
     Comment findById(Long id);
     List<Comment> findAll();
     List<Comment> findByContent(String content);
+    void save(Comment comment);
 }
