@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pja.s13227.tin.model.Blog;
 import pl.edu.pja.s13227.tin.persistence.BlogRepository;
+import pl.edu.pja.s13227.tin.persistence.PostRepository;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @Override
     public Blog findById(Long id) {
@@ -36,5 +40,11 @@ public class BlogServiceImpl implements BlogService {
     public void save(Blog blog) {
         blogRepository.save(blog);
         LOGGER.info("Saved blog: {}", blog);
+    }
+
+    @Override
+    public void delete(Blog blog) {
+        blog.getPosts().forEach(postRepository::delete);
+        blogRepository.delete(blog);
     }
 }

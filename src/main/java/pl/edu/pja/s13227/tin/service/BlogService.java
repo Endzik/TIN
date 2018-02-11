@@ -10,4 +10,5 @@ public interface BlogService {
     Blog findByName(String name);
     List<Blog> findAll();
     void save(Blog blog);
+    void delete(Blog blog);
 }

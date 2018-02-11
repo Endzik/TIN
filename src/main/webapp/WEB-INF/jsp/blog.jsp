@@ -21,6 +21,7 @@
         </div>
         <div class="container">
             <ul class="menu-right">
+                <li><form method="POST" action="/blogs/${blog.id}/delete"><button type="submit" class="btn btn-danger">Delete this blog</button></form></li>
                 <a href="/blogs"><li>All blogs</li></a>
                 <a href="/blogs/new"><li>New blog</li></a>
                 <a href="/categories"><li>New category</li></a>
@@ -48,7 +49,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h3>${post.title}</h3>
+                    <h3>
+                        ${post.title}
+                        <form method="POST" action="/posts/${post.id}/delete"><button type="submit" style="margin-left:5px;" class="btn btn-danger pull-right" >Delete</button></form>
+                        <span class="pull-right"><small>Added: ${post.created}</small></span>
+                    </h3>
                 </div>
             </div>
             <div class="row">

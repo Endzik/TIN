@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class Blog extends TimestampedEntity {
     @Column(unique = true)
     @NotNull
     private String name;
+    @Column(columnDefinition="TEXT")
     private String description;
 
     @ManyToMany
@@ -27,6 +29,7 @@ public class Blog extends TimestampedEntity {
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "blog")
+    @OrderBy("created desc")
     private Set<Post> posts = new HashSet<>();
 
     public Blog(){}

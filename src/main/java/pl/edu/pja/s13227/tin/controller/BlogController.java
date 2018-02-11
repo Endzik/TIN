@@ -36,11 +36,18 @@ public class BlogController {
     }
 
     @RequestMapping("/{id}")
-    public String post(@PathVariable Long id, Model model) {
+    public String blog(@PathVariable Long id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
         model.addAttribute("newPost", new Post());
         model.addAttribute("categories", categoryService.findAll());
         return "blog";
+    }
+
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public String deleteBlog(@PathVariable Long id) {
+        Blog blog = blogService.findById(id);
+        blogService.delete(blog);
+        return "redirect:/blogs";
     }
 
     @RequestMapping("/new")

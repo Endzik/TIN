@@ -13,4 +13,5 @@ public interface PostService {
     List<Post> findByBlog(Blog blog);
     List<Post> findByCategory(Category category);
     void save(Post post);
+    void delete(Post post);
 }

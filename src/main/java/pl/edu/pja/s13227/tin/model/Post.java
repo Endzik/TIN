@@ -3,6 +3,7 @@ package pl.edu.pja.s13227.tin.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -19,6 +20,8 @@ public class Post extends TimestampedEntity {
     private Set<Category> categories;
 
     private String title;
+
+    @Column(columnDefinition="TEXT")
     private String content;
 
     public Post() {}
